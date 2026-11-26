@@ -1,0 +1,5 @@
+scenario,open_s,snapshot_s,replay_s,replayed_records,torn_bytes,vectors
+"log only, no snapshot, no index",0.04134808399248868,1.0833959095180035e-05,0.039695915998890996,4,0,200000
+rebuild the index from scratch (k-means + assign),1.0746163330040872,,,,,200000
+"snapshot with index, empty log",0.01913820899790153,0.01730404101544991,5.64999645575881e-05,0,0,200000
+"snapshot with index + 100,000 log records",0.37400458398042247,0.020380791975185275,0.3507009580498561,100000,0,300000

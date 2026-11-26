@@ -1,0 +1,112 @@
+............                                                             [100%]
+12 passed in 0.21s
+HDF5 keys: {'distances': (10000, 100), 'neighbors': (10000, 100), 'test': (10000, 128), 'train': (1000000, 128)}
+dataset: sift-128-euclidean.hdf5 [1,000,000 x 128], ground truth: file (Euclidean)
+loaded 1,000,000 vectors in 0.3s
+flat: recall 1.0000, 11.84 ms/query, 84 QPS
+
+nlist=1024: train 0.8s on 65,536 vectors, add 1.1s, lists min/mean/max 83/977/4228, imbalance 1.20
+ nprobe  recall@10   ms/query      QPS   vs flat  scanned
+      1     0.3456      0.041    24443   289.5x    0.12%
+      2     0.5090      0.058    17290   204.8x    0.23%
+      4     0.6840      0.103     9739   115.3x    0.46%
+      8     0.8334      0.169     5927    70.2x    0.90%
+     16     0.9300      0.304     3289    39.0x    1.77%
+     32     0.9796      0.573     1746    20.7x    3.46%
+     64     0.9979      1.074      931    11.0x    6.72%
+    128     0.9999      2.059      486     5.8x   12.99%
+    256     1.0000      3.938      254     3.0x   25.29%
+    512     1.0000      7.344      136     1.6x   49.19%
+
+nlist=4096: train 10.0s on 262,144 vectors, add 3.5s, lists min/mean/max 1/244/1408, imbalance 1.23
+ nprobe  recall@10   ms/query      QPS   vs flat  scanned
+      1     0.2706      0.034    29234   346.2x    0.03%
+      2     0.4030      0.045    22375   265.0x    0.06%
+      4     0.5578      0.083    11993   142.0x    0.12%
+      8     0.7089      0.111     8973   106.3x    0.24%
+     16     0.8318      0.159     6282    74.4x    0.47%
+     32     0.9234      0.258     3880    45.9x    0.92%
+     64     0.9720      0.449     2226    26.4x    1.80%
+    128     0.9938      0.837     1194    14.1x    3.50%
+    256     1.0000      1.569      638     7.6x    6.85%
+    512     1.0000      2.979      336     4.0x   13.21%
+   1024     1.0000      5.643      177     2.1x   25.41%
+wrote results/search.csv
+HDF5 keys: {'distances': (10000, 100), 'neighbors': (10000, 100), 'test': (10000, 128), 'train': (1000000, 128)}
+faiss flat: recall 1.0000, 7.71 ms/query, 130 QPS
+
+faiss ivf1024: build 3.1s
+  nprobe     1  recall 0.3594  0.023 ms  42905 QPS
+  nprobe     2  recall 0.5273  0.036 ms  27549 QPS
+  nprobe     4  recall 0.6904  0.049 ms  20376 QPS
+  nprobe     8  recall 0.8340  0.084 ms  11953 QPS
+  nprobe    16  recall 0.9276  0.152 ms  6559 QPS
+  nprobe    32  recall 0.9805  0.288 ms  3471 QPS
+  nprobe    64  recall 0.9970  0.562 ms  1780 QPS
+  nprobe   128  recall 1.0000  1.081 ms  925 QPS
+  nprobe   256  recall 1.0000  2.112 ms  474 QPS
+  nprobe   512  recall 1.0000  4.126 ms  242 QPS
+
+faiss ivf4096: build 34.5s
+  nprobe     1  recall 0.2739  0.035 ms  28473 QPS
+  nprobe     2  recall 0.4068  0.038 ms  26482 QPS
+  nprobe     4  recall 0.5582  0.044 ms  22619 QPS
+  nprobe     8  recall 0.7113  0.056 ms  17769 QPS
+  nprobe    16  recall 0.8401  0.082 ms  12222 QPS
+  nprobe    32  recall 0.9266  0.127 ms  7845 QPS
+  nprobe    64  recall 0.9736  0.216 ms  4634 QPS
+  nprobe   128  recall 0.9941  0.401 ms  2491 QPS
+  nprobe   256  recall 1.0000  0.758 ms  1320 QPS
+  nprobe   512  recall 1.0000  1.497 ms  668 QPS
+  nprobe  1024  recall 1.0000  2.805 ms  356 QPS
+
+faiss hnsw (M=32, efConstruction=100): build 27.4s on 10 threads
+  efSearch   16  recall 0.8259  0.043 ms  23369 QPS
+  efSearch   32  recall 0.9177  0.069 ms  14579 QPS
+  efSearch   64  recall 0.9695  0.121 ms  8256 QPS
+  efSearch  128  recall 0.9921  0.221 ms  4528 QPS
+  efSearch  256  recall 0.9988  0.421 ms  2373 QPS
+  efSearch  512  recall 0.9999  0.830 ms  1205 QPS
+wrote results/faiss.csv
+mode      sync call     inserts/s   us/insert
+buffered  none             321374         3.1
+os        none             175307         5.7
+batch     fsync            123503         8.1
+always    fsync             36091        27.7
+batch     F_FULLFSYNC       11604        86.2
+always    F_FULLFSYNC         255      3921.0
+wrote results/writes.csv
+HDF5 keys: {'distances': (10000, 100), 'neighbors': (10000, 100), 'test': (10000, 128), 'train': (1000000, 128)}
+
+log only, no snapshot, no index                         0.25s
+rebuild the index from scratch (k-means + assign)      13.79s
+snapshot with index, empty log                          0.10s
+snapshot with index + 100,000 log records               0.44s
+wrote results/recovery.csv
+mode      acknowledged  recovered  LOST acknowledged  torn bytes
+buffered        219053     219008                 45           0
+buffered        206137     206080                 57           0
+buffered        158148     158144                  4           0
+os               95752      95753                  0           0
+os              121991     121991                  0           0
+os              111147     111147                  0           0
+batch           134333     134334                  0           0
+batch            91046      91046                  0           0
+batch           105280     105281                  0           0
+always           36682      36683                  0           0
+always           46057      46057                  0           0
+always           33142      33143                  0           0
+wrote results/crash.csv
+HDF5 keys: {'distances': (10000, 100), 'neighbors': (10000, 100), 'test': (10000, 128), 'train': (1000000, 128)}
+index only                            0.430 ms  recall 0.9805  delta       0  dead       0
+delta = 0.5% of index                 0.484 ms  recall 0.9810  delta    4500  dead       0
+delta = 1% of index                   0.535 ms  recall 0.9810  delta    9000  dead       0
+delta = 2% of index                   0.726 ms  recall 0.9810  delta   18000  dead       0
+delta = 5% of index                   1.192 ms  recall 0.9815  delta   45000  dead       0
+delta = 10% of index                  1.781 ms  recall 0.9820  delta   90000  dead       0
++ 10% of indexed rows deleted         1.749 ms  recall 0.9810  delta   90000  dead   90000
+after compact (same centroids)        0.418 ms  recall 0.9800  delta       0  dead       0
+after compact (retrained)             0.421 ms  recall 0.9840  delta       0  dead       0
+wrote results/delta.csv
+wrote results/summary.md and plots
+Done: open results/summary.md

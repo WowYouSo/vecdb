@@ -1,0 +1,13 @@
+mode,acknowledged,recovered,lost_acknowledged,recovered_unacknowledged,torn_bytes
+buffered,219053,219008,45,0,0
+buffered,206137,206080,57,0,0
+buffered,158148,158144,4,0,0
+os,95752,95753,0,1,0
+os,121991,121991,0,0,0
+os,111147,111147,0,0,0
+batch,134333,134334,0,1,0
+batch,91046,91046,0,0,0
+batch,105280,105281,0,1,0
+always,36682,36683,0,1,0
+always,46057,46057,0,0,0
+always,33142,33143,0,1,0

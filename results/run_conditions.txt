@@ -1,0 +1,10 @@
+command: ./run_all.sh 2>&1 | tee results/run_all.log   (N and NLIST unset: defaults)
+start: 2026-11-27 00:15:05
+power source at start: AC Power
+low power mode: 0
+load averages at start (1, 5, 15 min): 2.76 3.73 3.49
+end: 2026-11-27 00:18:25
+power source at end: AC Power
+load averages at end (1, 5, 15 min): 6.91 5.27 4.17
+wall seconds: 200
+run_all.sh exit code: 0
